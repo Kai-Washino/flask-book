@@ -3,6 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <title>問い合わせ完了</title>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
         <link 
             rel="stylesheet"
             href="{{ url_for('static', filename='style.css')}}"
