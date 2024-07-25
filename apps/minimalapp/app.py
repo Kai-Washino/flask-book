@@ -11,6 +11,8 @@ from flask import (
     request, 
     redirect,
     flash,
+    make_response,
+    session,
 )
 
 from flask_mail import Mail, Message
@@ -49,7 +51,10 @@ def show_name(name):
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    response = make_response(render_template("contact.html"))
+    response.set_cookie("flaskbook key", "flaskbook value")
+    session["username"] = "ichiro"
+    return response
 
 @app.route("/contact/complete", methods = ["GET", "POST"])
 def contact_complete():
@@ -104,3 +109,5 @@ def send_email(to, subject, template, **kwargs):
     msg.body = render_template(template + ".txt", **kwargs)
     msg.html = render_template(template + ".html", **kwargs)
     mail.send(msg)
+
+
