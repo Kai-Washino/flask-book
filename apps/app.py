@@ -10,8 +10,9 @@ def create_app():
 
     app.config.from_mapping(        
         SECRET_KEY = "akjdjfaoiewjkfawjk",
-        SQLALCHEMY_DATABASE_URI=f"sqlite:///{Path(__file__).parent.parent / 'local.sqlite'}"
-        SQLALCHEMY_TRACK_MODIFICATIONS=False
+        SQLALCHEMY_DATABASE_URI=f"sqlite:///{Path(__file__).parent.parent / 'local.sqlite'}",
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        SQLALCHEMY_ECHO = True
     )
     db.init_app(app)
     Migrate(app, db)
