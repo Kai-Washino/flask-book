@@ -17,6 +17,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
+    user_images = db.relationship(
+        "UserImage", backref="user", order_by="desc(UserImage.id)"
+    )
+
     # パスワードをセットするためのプロパティ
     @property
     def password(self):
